@@ -1,0 +1,134 @@
+openapi: 3.0.1
+info:
+  title: Autores
+  description: API para controle de Autores
+  version: 0.0.1
+  contact:
+    name: Gabriel Menezes
+    email: gabriel.menezes@farmtech.com.br
+    url: https://www.linkedin.com/in/anjos-gabriel/
+  license:
+    name: 'Licença: GPLv3'
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+
+tags:
+
+  - name: autor
+    description: Informações Autor
+
+paths:
+  /autor:
+    get:
+      tags:
+        - autor
+      summary: Recupera todos os autores
+      operationId: listarAutor
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseAutor"
+
+    post:
+      tags:
+        - autor
+      summary: Adiciona um Autor
+      operationId: cadastroAutor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestPayloadAutor"
+      responses:
+        201:
+          description: Autor criado com sucsso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseAutor"
+  /autor/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      tags:
+        - autor
+      summary: Recuper Autor por Id
+      operationId: listarAutorId
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseAutor"
+    put:
+      tags:
+        - autor
+      summary: Altera um Autor por Id
+      operationId: alteraAutor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestPayloadAutor"
+      responses:
+        201:
+          description: Autor criado com sucsso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseAutor"
+    delete:
+      tags:
+        - autor
+      summary: Exclusão Lógica de um Autor por Id
+      operationId: deleteAutor
+      responses:
+        200:
+          description: Autor deletado com Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseAutor"
+
+
+components:
+  schemas:
+    RequestPayloadAutor:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              nome:
+                type: string
+              nascimento:
+                type: string
+
+
+    ResponseAutor:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              nome:
+                type: string
+              nascimento:
+                type: string
+              status:
+                type: string
+
+
